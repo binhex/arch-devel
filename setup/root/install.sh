@@ -6,19 +6,26 @@ set -e
 # define pacman packages
 pacman_packages="base-devel"
 
-# install pre-reqs
-pacman -S --needed $pacman_packages --noconfirm
-
 # define aur helper
 aur_helper="apacman"
 
-# manually download aur helper from binhex repo
-curl -o "/tmp/${aur_helper}-any.pkg.tar.xz" -L "https://github.com/binhex/arch-packages/raw/master/compiled/${aur_helper}-any.pkg.tar.xz"
-pacman -U "/tmp/${aur_helper}-any.pkg.tar.xz" --noconfirm
+# install pre-reqs
+pacman -S --needed $pacman_packages --noconfirm
+
+# download build scripts from github
+curl -o /tmp/scripts-master.zip -L https://github.com/binhex/scripts/archive/master.zip
+
+# unzip build scripts
+unzip /tmp/scripts-master.zip -d /tmp
+
+# move shell scripts to /root
+find /tmp/scripts-master/ -type f -name '*.sh' -exec mv -i {} /root/  \;
+
+# call aur install script (arch user repo)
+source /root/aur.sh
 
 # cleanup
 yes|pacman -Scc
 rm -rf /usr/share/locale/*
 rm -rf /usr/share/man/*
-rm -rf /root/*
 rm -rf /tmp/*
