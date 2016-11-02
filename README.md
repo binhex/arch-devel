@@ -8,7 +8,7 @@ Arch Linux is an independently developed, i686/x86-64 general purpose GNU/Linux 
 
 **Build notes**
 
-Arch Linux development image using "arch-scratch" image from the binhex repository https://hub.docker.com/r/binhex/arch-scratch/. This image is set to a snapshot by using the archive.archlinux.org website for package updates, this is required to reduce image size by preventing continual updates to packages.
+Arch Linux development image using "arch-base" image from the [binhex repository](https://hub.docker.com/r/binhex/arch-base/). This image is set to a snapshot by using the archive.archlinux.org website for package updates, this is required to reduce image size by preventing continual updates to packages.
 
 **Notes**
 
