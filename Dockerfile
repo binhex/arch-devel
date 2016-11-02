@@ -13,3 +13,6 @@ ADD setup/root/*.sh /root/
 # run bash script to update base image, set locale, install supervisor and cleanup
 RUN chmod +x /root/*.sh && \
 	/bin/bash /root/install.sh
+
+# run bash
+CMD ["/bin/bash"]
