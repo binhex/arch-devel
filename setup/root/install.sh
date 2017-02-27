@@ -26,23 +26,13 @@ if [[ ! -z "${pacman_packages}" ]]; then
 	pacman -S --needed $pacman_packages --noconfirm
 fi
 
-# aor packages
-####
+# define aur helper and ver
+aur_helper="apacman"
+aur_helper_version="3.1-1"
 
-# define arch official repo (aor) packages
-aor_packages=""
-
-# call aor script (arch official repo)
-source /root/aor.sh
-
-# aur packages
-####
-
-# define aur packages
-aur_packages=""
-
-# call aur install script (arch user repo)
-source /root/aur.sh
+# install aur helper from github
+curl -o "/tmp/${aur_helper}-any.pkg.tar.xz" -L "https://github.com/binhex/arch-packages/raw/master/compiled/${aur_helper}-${aur_helper_version}-any.pkg.tar.xz"
+pacman -U "/tmp/${aur_helper}-any.pkg.tar.xz" --noconfirm
 
 # container perms
 ####
