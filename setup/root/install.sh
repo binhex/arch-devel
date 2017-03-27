@@ -19,20 +19,27 @@ find /tmp/scripts-master/ -type f -name '*.sh' -exec mv -i {} /root/  \;
 ####
 
 # define pacman packages
-pacman_packages="base-devel"
+pacman_packages="base-devel python2 python2-pip"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
 	pacman -S --needed $pacman_packages --noconfirm
 fi
 
-# define aur helper and ver
-aur_helper="apacman"
-aur_helper_version="3.1-1"
+# custom scripts
+####
 
-# install aur helper from github
-curl -o "/tmp/${aur_helper}-any.pkg.tar.xz" -L "https://github.com/binhex/arch-packages/raw/master/compiled/${aur_helper}-${aur_helper_version}-any.pkg.tar.xz"
-pacman -U "/tmp/${aur_helper}-any.pkg.tar.xz" --noconfirm
+# call custom install script
+source /root/custom.sh
+
+# aur packages
+####
+
+# define aur packages
+aur_packages=""
+
+# call aur install script (arch user repo)
+source /root/aur.sh
 
 # container perms
 ####
