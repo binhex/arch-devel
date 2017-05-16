@@ -5,7 +5,7 @@ MAINTAINER binhex
 ##################
 
 # add install bash script
-ADD setup/root/*.sh /root/
+ADD build/root/*.sh /root/
 
 # install app
 #############
