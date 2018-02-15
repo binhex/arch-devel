@@ -3,7 +3,7 @@
 # exit script if return code != 0
 set -e
 
-# install additonal python modules
+# install additional python modules
 /usr/bin/python2 -m pip install pex virtualenv requests
 
 # bootstrap and install apacman

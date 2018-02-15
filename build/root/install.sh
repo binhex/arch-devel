@@ -19,7 +19,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /root/
 ####
 
 # define pacman packages
-pacman_packages="base-devel python2 python2-pip"
+pacman_packages="base-devel python2 python2-pip git"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
