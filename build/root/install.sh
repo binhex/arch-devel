@@ -45,8 +45,8 @@ fi
 # custom scripts
 ####
 
-# call custom install script
-source /root/custom.sh
+# install additional python modules
+/usr/bin/python2 -m pip install pex virtualenv requests
 
 # aur packages
 ####
