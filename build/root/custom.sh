@@ -12,6 +12,6 @@ aur_helper_version="3.1-1"
 
 # install aur helper
 pacman -S --needed base-devel --noconfirm
-curly.sh -of "/tmp/${aur_helper}-any.pkg.tar.xz" -url "https://github.com/binhex/arch-packages/raw/master/compiled/${OS_ARCH}/${aur_helper}-${aur_helper_version}-any.pkg.tar.xz"
+rcurl.sh -o "/tmp/${aur_helper}-any.pkg.tar.xz" "https://github.com/binhex/arch-packages/raw/master/compiled/${OS_ARCH}/${aur_helper}-${aur_helper_version}-any.pkg.tar.xz"
 pacman -U "/tmp/${aur_helper}-any.pkg.tar.xz" --noconfirm
 
