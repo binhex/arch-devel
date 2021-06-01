@@ -57,6 +57,12 @@ aur_packages=""
 # call aur install script (arch user repo)
 source aur.sh
 
+# custom
+####
+
+# strip out restriction to not allow make as user root, used during make of aur helper
+sed -i -e 's~exit $E_ROOT~~g' "/usr/bin/makepkg"
+
 # container perms
 ####
 
