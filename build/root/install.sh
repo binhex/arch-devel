@@ -38,18 +38,12 @@ fi
 ####
 
 # define pacman packages
-pacman_packages="base-devel python2 python python-pip git"
+pacman_packages="base-devel python python-pip git"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
 	pacman -S --needed $pacman_packages --noconfirm
 fi
-
-# custom scripts
-####
-
-# install additional python modules
-/usr/bin/python2 -m pip install pex virtualenv requests
 
 # aur packages
 ####
