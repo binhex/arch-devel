@@ -3,9 +3,6 @@
 # exit script if return code != 0
 set -e
 
-# install additional python modules
-/usr/bin/python2 -m pip install pex virtualenv requests
-
 # define aur helper and ver
 aur_helper="apacman"
 aur_helper_version="3.1-1"
