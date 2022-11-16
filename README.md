@@ -16,7 +16,6 @@ This image is primarily used to build packages from AUR that we then consume via
 
 - supervisor (process manager)
 - base-devel (tools required to compile AUR packages)
-- apacman (AUR helper)
 
 If you appreciate my work, then please consider buying me a beer  :D
 
