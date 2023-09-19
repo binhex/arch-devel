@@ -16,7 +16,7 @@ arg RELEASETAG
 
 # run bash script to update base image, set locale, install supervisor and cleanup
 RUN chmod +x /root/*.sh && \
-	/bin/bash /root/install.sh "${release_tag_name}"
+	/bin/bash /root/install.sh "${RELEASETAG}"
 
 # run bash
 CMD ["/bin/bash"]
