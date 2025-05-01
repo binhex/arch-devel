@@ -9,6 +9,6 @@ on:
 
 jobs:
   call-reusable-workflow:
-    uses: workflow-templates/.github/workflows/workflow-docker-manual.yml@main
+    uses: binhex/workflow-templates/.github/workflows/workflow-docker-manual.yml@main
     with:
       tags: ${{ github.event.inputs.tags }}
