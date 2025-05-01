@@ -84,22 +84,22 @@ jobs:
           git_clone_scripts_repo="https://github.com/binhex/scripts.git"
           git clone "${git_clone_scripts_repo}" "${git_clone_scripts_dest}"
           "${git_clone_scripts_dest}/shell/arch/docker/testrunner.sh" --app-name ${{ steps.generate_app_name.outputs.app_name }} --image-name "ghcr.io/${{ github.repository }}:${{ steps.generate_temporary_tag_name.outputs.test_tag }}"
-      - name: Generate sub version tag name
+      - name: Generate major-minor version tag name
         shell: bash
         run: |
-          # Get tag name
+          # Get release tag name
           release_version="${{ github.event.inputs.tags }}"
 
-          # Validate and construct sub-version
+          # Validate and construct major-minor version
           if [[ "${release_version}" =~ ^(v?[0-9]+)\.([0-9]+)\.[0-9]+ ]]; then
-            sub_version="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.x"
-            echo "[debug] Constructed sub-version tag name: ${sub_version}"
-            echo "sub_version=${sub_version}" >> $GITHUB_OUTPUT
+            major_minor_version="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
+            echo "[debug] Constructed major-minor version tag name: ${major_minor_version}"
+            echo "major_minor_version=${major_minor_version}" >> $GITHUB_OUTPUT
           else
-            echo "[warn] Release tag '${release_version}' does not include 3 or more octets, sub-version tag name not constructed."
-            echo "sub_version=" >> $GITHUB_OUTPUT
+            echo "[warn] Release tag '${release_version}' does not include 3 or more octets, major-minor version tag name not constructed."
+            echo "major_minor_version=" >> $GITHUB_OUTPUT
           fi
-        id: generate_sub_version
+        id: generate_major_minor_version
       - name: Generate tag names
         shell: bash
         run: |
@@ -115,8 +115,8 @@ jobs:
           tag_names=""
           for registry in "${registries[@]}"; do
             tag_names+="${registry}:${{ github.event.inputs.tags }}, ${registry}:latest, "
-            if [[ -n "${{ steps.generate_sub_version.outputs.sub_version }}" ]]; then
-              tag_names+="${registry}:${{ steps.generate_sub_version.outputs.sub_version }}, "
+            if [[ -n "${{ steps.generate_major_minor_version.outputs.major_minor_version }}" ]]; then
+              tag_names+="${registry}:${{ steps.generate_major_minor_version.outputs.major_minor_version }}, "
             fi
           done
 
