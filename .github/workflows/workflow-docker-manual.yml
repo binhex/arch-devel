@@ -93,10 +93,10 @@ jobs:
           # Validate and construct sub-version
           if [[ "${release_version}" =~ ^(v?[0-9]+)\.([0-9]+)\.[0-9]+ ]]; then
             sub_version="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.x"
-            echo "[debug] Constructed sub-version: $sub_version"
-            echo "sub_version=$sub_version" >> $GITHUB_OUTPUT
+            echo "[debug] Constructed sub-version tag name: ${sub_version}"
+            echo "sub_version=${sub_version}" >> $GITHUB_OUTPUT
           else
-            echo "[warn] Release tag '${release_version}' does not include 3 or more octets, sub-version tag not created."
+            echo "[warn] Release tag '${release_version}' does not include 3 or more octets, sub-version tag name not constructed."
             echo "sub_version=" >> $GITHUB_OUTPUT
           fi
         id: generate_sub_version
@@ -114,7 +114,7 @@ jobs:
           # Construct tag names
           tag_names=""
           for registry in "${registries[@]}"; do
-            tag_names+="${registry}:${{ github.event.inputs.tags }}, "
+            tag_names+="${registry}:${{ github.event.inputs.tags }}, ${registry}:latest, "
             if [[ -n "${{ steps.generate_sub_version.outputs.sub_version }}" ]]; then
               tag_names+="${registry}:${{ steps.generate_sub_version.outputs.sub_version }}, "
             fi
@@ -124,7 +124,8 @@ jobs:
           tag_names="${tag_names%, }"
 
           # Output tag names
-          echo "tag_names=$tag_names" >> $GITHUB_OUTPUT
+          echo "[debug] Constructed tag names: ${tag_names}"
+          echo "tag_names=${tag_names}" >> $GITHUB_OUTPUT
         id: generate_tag_names
       # note this will re-use the internal cached amd64 image from the previous build
       - name: Build multi-arch Docker image, tag and push to registries
