@@ -14,6 +14,13 @@ ARG TARGETARCH
 # add install bash script
 ADD build/root/*.sh /root/
 
+# healthcheck
+#############
+
+# ensure internet connectivity, used primarily when sharing network with other conainers
+HEALTHCHECK --interval=1m --timeout=3s \
+  CMD curl -s https://github.com &>/dev/null || kill 1
+
 # install app
 #############
 
