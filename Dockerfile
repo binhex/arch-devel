@@ -2,6 +2,9 @@ FROM binhex/arch-base:latest
 LABEL org.opencontainers.image.authors="binhex"
 LABEL org.opencontainers.image.source="https://github.com/binhex/arch-devel"
 
+# app name from buildx arg
+ARG APPNAME
+
 # release tag name from buildx arg
 ARG RELEASETAG
 
@@ -30,7 +33,7 @@ HEALTHCHECK \
 
 # run bash script to update base image, set locale, install supervisor and cleanup
 RUN chmod +x /root/*.sh && \
-	/bin/bash /root/install.sh "${RELEASETAG}" "${TARGETARCH}"
+	/bin/bash /root/install.sh "${APPNAME}" "${RELEASETAG}" "${TARGETARCH}"
 
 # run bash
 CMD ["/bin/bash"]
