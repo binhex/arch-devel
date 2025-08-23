@@ -23,7 +23,7 @@ ADD build/root/*.sh /root/
 # ensure internet connectivity, used primarily when sharing network with other containers
 HEALTHCHECK \
 	--interval=2m \
-	--timeout=30s \
+	--timeout=60s \
 	--retries=5 \
 	--start-period=2m \
   CMD /usr/local/bin/system/scripts/docker/healthcheck.sh || exit 1
