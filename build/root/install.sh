@@ -40,7 +40,7 @@ refresh.sh
 ####
 
 # define pacman packages
-pacman_packages="base-devel python python-pip git"
+pacman_packages="base-devel python python-pip git python-setuptools"
 
 # install compiled packages using pacman
 if [[ -n "${pacman_packages}" ]]; then
@@ -50,15 +50,6 @@ if [[ -n "${pacman_packages}" ]]; then
 	fi
 	pacman -S --needed $pacman_packages --noconfirm
 fi
-
-# aur packages
-####
-
-# define aur packages
-aur_packages=""
-
-# call aur install script (arch user repo)
-source aur.sh
 
 # custom
 ####
