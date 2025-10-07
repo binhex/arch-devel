@@ -51,17 +51,5 @@ if [[ -n "${pacman_packages}" ]]; then
 	pacman -S --needed $pacman_packages --noconfirm
 fi
 
-# custom
-####
-
-# strip out restriction to not allow make as user root, used during make of aur helper
-sed -i -e 's~exit $E_ROOT~~g' "/usr/bin/makepkg"
-
-# container perms
-####
-
-# env vars
-####
-
 # cleanup
 cleanup.sh
